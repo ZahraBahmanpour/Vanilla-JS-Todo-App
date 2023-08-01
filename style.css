@@ -1,1 +1,35 @@
 @import "./main.css";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--white);
+  padding: 3rem;
+  width: 40%;
+  border-radius: 10px;
+  margin: 2rem auto;
+  box-sizing: border-box;
+}
+.heading--top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading--bottom {
+  color: var(--info);
+}
+
+.btn {
+  color: var(--white);
+  background-color: var(--button);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.heading--top .btn {
+  width: 2rem;
+  height: 2rem;
+}
