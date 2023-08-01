@@ -42,12 +42,14 @@
   margin-top: 1.5rem;
 }
 
-.box--summary .badge {
+.box--summary .badge,
+.box--timeline .badge {
   font-size: 20px;
   font-weight: 800;
 }
 
-.box--summary span {
+.box--summary span,
+.box--timeline span {
   color: var(--info);
 }
 
@@ -89,4 +91,40 @@
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+/* timeline */
+.box--timeline {
+  margin-top: 2em;
+}
+
+.box--timeline .timeline--row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeline--row .line {
+  height: 2px;
+  width: 80%;
+  background-color: var(--line);
+}
+
+.box--timeline .todo-card {
+  box-shadow: var(--box-shadow);
+  border-radius: 3px;
+  margin-left: 50px;
+  padding: 10px;
+  position: relative;
+}
+
+.box--timeline .todo-card:hover {
+  box-shadow: none;
+  background-color: var(--blue);
+  color: white;
+  cursor: pointer;
+}
+
+.box--timeline .todo-card .badge {
+  font-size: 16px;
 }

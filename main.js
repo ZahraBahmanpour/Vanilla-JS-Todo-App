@@ -43,9 +43,40 @@ const showTasksCategory = () => {
   });
 };
 
+const showTasksInTimeline = () => {
+  const timeline = document.querySelector(".box--timeline");
+  const tasks = filterTodaysTasks();
+  timeline.innerHTML = "";
+  tasks.sort((a, b) => a.startTime - b.startTime);
+  tasks.forEach((task, i) => {
+    timeline.innerHTML += `<div class="timeline--row">
+    <div class="hour">${new Date(task.startTime).getHours()}:${new Date(
+      task.startTime
+    ).getMinutes()}</div>
+    <div class="line"></div>
+  </div><div class="todo-card" id="todo-card-${task.id}">
+  <div class="category-color-badge"></div>
+  <div class="badge">${task.title}</div>
+  <span>${task.description}</span>
+</div>`;
+
+    if (i < tasks.length - 1 && task.endTime < tasks[i + 1].startTime) {
+      const start = new Date(task.endTime);
+      const end = new Date(tasks[i + 1].startTime);
+      while (start.getTime() < end.getTime()) {
+        timeline.innerHTML += `<div class="timeline--row">
+        <div class="hour">${start.getHours()}:${start.getMinutes()}</div>
+        <div class="line"></div>`;
+        start.setMinutes(start.getMinutes() + 30);
+      }
+    }
+  });
+};
+
 const documentReady = () => {
   showTodaysTaskCount();
   showTaksSummary();
   showTasksCategory();
+  showTasksInTimeline();
 };
 document.addEventListener("DOMContentLoaded", documentReady);
