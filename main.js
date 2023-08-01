@@ -6,6 +6,7 @@ const filterTodaysTasks = () => {
 
 const viewModal = document.getElementById("view-task-modal");
 const addModal = document.getElementById("add-task-modal");
+const addForm = document.getElementById("add-form");
 
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
@@ -139,12 +140,65 @@ const generateCategoryLabels = () => {
         .querySelectorAll(".task-type-label")
         .forEach((label) => label.classList.remove("selected"));
       e.target.classList.add("selected");
+      addForm["categoryId"].value = e.target.dataset.id;
     });
     document.getElementById("task-category-container").append(categoryLabelDiv);
   });
+};
+
+const updateUI = () => {
+  showTodaysTaskCount();
+  showTaksSummary();
+  showTasksCategory();
+  showTasksInTimeline();
+};
+
+const saveTask = (e) => {
+  e.preventDefault();
+
+  const title = e.target["title"].value;
+  const date = new Date(e.target["date"].value);
+  const startTime = new Date(date);
+  startTime.setHours(
+    e.target["start-time"].value.toString().split(":")[0],
+    e.target["start-time"].value.toString().split(":")[1]
+  );
+  const endTime = new Date(date);
+  endTime.setHours(
+    e.target["end-time"].value.toString().split(":")[0],
+    e.target["end-time"].value.toString().split(":")[1]
+  );
+  const categoryId = Number(e.target["categoryId"].value);
+  const description = e.target["description"].value;
+  if (!title || !date || !startTime || !endTime || !categoryId) {
+    alert("All fields are required");
+    return;
+  }
+
+  if (endTime.getTime() < startTime.getTime()) {
+    alert("End time should be greater than start time");
+    return;
+  }
+
+  const newTask = {
+    id: Date.now().toString(),
+    title,
+    date,
+    startTime,
+    endTime,
+    categoryId,
+    description,
+    done: false,
+  };
+  console.log(newTask);
+  tasks.push(newTask);
+  addModal.style.display = "none";
+  updateUI();
 };
 
 document.getElementById("btn--addTask").addEventListener("click", () => {
   addModal.style.display = "block";
   generateCategoryLabels();
 });
+
+addForm.addEventListener("submit", saveTask);
