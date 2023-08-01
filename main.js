@@ -5,6 +5,7 @@ const filterTodaysTasks = () => {
 };
 
 const viewModal = document.getElementById("view-task-modal");
+const addModal = document.getElementById("add-task-modal");
 
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
@@ -68,10 +69,10 @@ const createTimeLineCardEventListeners = () => {
       document.getElementById("view-modal-endTime").textContent = moment(
         currentTask.endTime
       ).format("hh:mm");
-      const categoryBadge = document.getElementById("view-modal-category");
-      categoryBadge.textContent = category.name;
-      categoryBadge.style.backgroundColor = category.color;
-      categoryBadge.classList.add("task-type-badge");
+      const categoryLabel = document.getElementById("view-modal-category");
+      categoryLabel.textContent = category.name;
+      categoryLabel.style.backgroundColor = category.color;
+      categoryLabel.classList.add("task-type-label");
       document.getElementById("view-modal-description").textContent =
         currentTask.description;
     });
@@ -119,7 +120,31 @@ const documentReady = () => {
 document.addEventListener("DOMContentLoaded", documentReady);
 
 window.addEventListener("click", (e) => {
-  if (e.target == viewModal) {
+  if (e.target == viewModal || e.target == addModal) {
     viewModal.style.display = "none";
+    addModal.style.display = "none";
   }
+});
+
+const generateCategoryLabels = () => {
+  document.getElementById("task-category-container").innerHTML = "";
+  categories.forEach((c) => {
+    const categoryLabelDiv = document.createElement("div");
+    categoryLabelDiv.classList.add("task-type-label");
+    categoryLabelDiv.dataset.id = c.id;
+    categoryLabelDiv.style.backgroundColor = c.color;
+    categoryLabelDiv.textContent = c.name;
+    categoryLabelDiv.addEventListener("click", (e) => {
+      document
+        .querySelectorAll(".task-type-label")
+        .forEach((label) => label.classList.remove("selected"));
+      e.target.classList.add("selected");
+    });
+    document.getElementById("task-category-container").append(categoryLabelDiv);
+  });
+};
+
+document.getElementById("btn--addTask").addEventListener("click", () => {
+  addModal.style.display = "block";
+  generateCategoryLabels();
 });

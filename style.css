@@ -31,6 +31,10 @@
   font-size: 16px;
 }
 
+form .btn {
+  padding: 0.5rem;
+}
+
 .heading--top .btn {
   width: 2rem;
   height: 2rem;
@@ -151,11 +155,44 @@
   width: 40%;
 }
 
-.task-type-badge {
+.task-type-label {
   color: var(--white);
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
   padding: 10px;
   width: fit-content;
+}
+
+form .task-type-label:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.task-type-label.selected {
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+/* view modal content */
+input[type="text"] {
+  padding: 1rem;
+  font-size: 20px;
+}
+
+input::placeholder {
+  color: var(--info);
+}
+
+.form--rowContainer {
+  padding: 1rem;
+}
+
+.form--rowContainer label {
+  margin-right: 0.5rem;
+}
+
+.task-category-container {
+  display: flex;
+  justify-content: space-evenly;
 }
