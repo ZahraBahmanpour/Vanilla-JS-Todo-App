@@ -36,7 +36,26 @@
         <div class="box--timeline"></div>
       </main>
     </div>
+
+    <!--View Task Modal-->
+    <div id="view-task-modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal--content">
+        <h2 id="view-modal-title"></h2>
+        <label>Date</label>
+        <div id="view-modal-date"></div>
+        <label>Start Time</label>
+        <div id="view-modal-startTime"></div>
+        <label>End Time</label>
+        <div id="view-modal-endTime"></div>
+        <label>Category</label>
+        <div class="task-type-badge" id="view-modal-category"></div>
+        <label>Description</label>
+        <div id="view-modal-description"></div>
+      </div>
+    </div>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <script type="module" src="./module.js"></script>
   <script type="module" src="./main.js"></script>
 </html>

@@ -4,6 +4,8 @@ const filterTodaysTasks = () => {
   return tasks.filter((task) => task.date.getDate() === new Date().getDate());
 };
 
+const viewModal = document.getElementById("view-task-modal");
+
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
     filterTodaysTasks().length
@@ -43,6 +45,39 @@ const showTasksCategory = () => {
   });
 };
 
+const createTimeLineCardEventListeners = () => {
+  const todoCards = document.querySelectorAll(".box--timeline .todo-card");
+  todoCards.forEach((todoCard) => {
+    todoCard.addEventListener("click", (e) => {
+      viewModal.style.display = "block";
+
+      const currentCardId = e.currentTarget.id.split("-")[2];
+      const currentTask = filterTodaysTasks().find(
+        (t) => t.id === currentCardId
+      );
+      const category = categories.find((c) => c.id === currentTask.categoryId);
+
+      document.getElementById("view-modal-title").textContent =
+        currentTask.title;
+      document.getElementById("view-modal-date").textContent = moment(
+        currentTask.date
+      ).format("YYYY-MM-DD");
+      document.getElementById("view-modal-startTime").textContent = moment(
+        currentTask.startTime
+      ).format("hh:mm");
+      document.getElementById("view-modal-endTime").textContent = moment(
+        currentTask.endTime
+      ).format("hh:mm");
+      const categoryBadge = document.getElementById("view-modal-category");
+      categoryBadge.textContent = category.name;
+      categoryBadge.style.backgroundColor = category.color;
+      categoryBadge.classList.add("task-type-badge");
+      document.getElementById("view-modal-description").textContent =
+        currentTask.description;
+    });
+  });
+};
+
 const showTasksInTimeline = () => {
   const timeline = document.querySelector(".box--timeline");
   const tasks = filterTodaysTasks();
@@ -71,6 +106,8 @@ const showTasksInTimeline = () => {
       }
     }
   });
+
+  createTimeLineCardEventListeners();
 };
 
 const documentReady = () => {
@@ -80,3 +117,9 @@ const documentReady = () => {
   showTasksInTimeline();
 };
 document.addEventListener("DOMContentLoaded", documentReady);
+
+window.addEventListener("click", (e) => {
+  if (e.target == viewModal) {
+    viewModal.style.display = "none";
+  }
+});
