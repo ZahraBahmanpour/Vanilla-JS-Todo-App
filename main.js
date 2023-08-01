@@ -24,8 +24,28 @@ const showTaksSummary = () => {
     </div>`;
 };
 
+const showTasksCategory = () => {
+  document.getElementById("box--categories").innerHTML = "";
+  categories.forEach((c) => {
+    const taskCount = filterTodaysTasks().filter(
+      (t) => t.categoryId === c.id
+    ).length;
+    if (taskCount > 0) {
+      const card = `<div class="category-card">
+            <div class="category-color-badge" style=background-color:${
+              c.color
+            }></div>
+            <div class="badge">${c.name}</div>
+            <span>${taskCount} ${taskCount > 1 ? `tasks` : `task`}</span>
+            </div>`;
+      document.getElementById("box--categories").innerHTML += card;
+    }
+  });
+};
+
 const documentReady = () => {
   showTodaysTaskCount();
   showTaksSummary();
+  showTasksCategory();
 };
 document.addEventListener("DOMContentLoaded", documentReady);
