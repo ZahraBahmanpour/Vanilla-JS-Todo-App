@@ -11,6 +11,8 @@
   margin: 2rem auto;
   box-sizing: border-box;
 }
+
+/* heading */
 .heading--top {
   display: flex;
   align-items: center;
@@ -32,4 +34,30 @@
 .heading--top .btn {
   width: 2rem;
   height: 2rem;
+}
+
+/* summary */
+
+.box--summary {
+  margin-top: 1.5rem;
+}
+
+.box--summary .badge {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.box--summary span {
+  color: var(--info);
+}
+
+.box--tasks {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1em;
+  border-bottom: 1px solid var(--line);
+}
+
+.box--tasks .task-card {
+  padding: 0 2rem;
 }
