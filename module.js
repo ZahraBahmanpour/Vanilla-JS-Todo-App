@@ -40,7 +40,7 @@ export const tasks = [
   {
     id: "4",
     title: "Running",
-    date: new Date("2023-08-2"),
+    date: new Date("2023-08-3"),
     startTime: new Date("2023-08-2").setHours(8, 30),
     endTime: new Date("2023-08-2").setHours(10, 30),
     categoryId: 4,
@@ -50,7 +50,7 @@ export const tasks = [
   {
     id: "5",
     title: "Lunch",
-    date: new Date('"2023-08-2"'),
+    date: new Date('"2023-08-3"'),
     startTime: new Date("2023-08-2").setHours(11, 30),
     endTime: new Date("2023-08-2").setHours(12, 0),
     categoryId: 5,
