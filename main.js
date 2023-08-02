@@ -279,7 +279,6 @@ document
 const submitForm = (e) => {
   e.preventDefault();
   const task = gatherFormData();
-  console.log(task);
   if (task) {
     if (editTaskId) {
       tasks.splice(
@@ -321,7 +320,6 @@ document.getElementById("btn--deleteTask").addEventListener("click", () => {
       ch.classList.add("show");
 
       ch.addEventListener("change", (e) => {
-        console.dir(ch);
         if (ch.checked) {
           deleteTaskList.push(ch.value);
         } else {
