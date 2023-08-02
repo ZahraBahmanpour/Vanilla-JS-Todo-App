@@ -132,7 +132,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
-const generateCategoryLabels = () => {
+const generateCategoryLabels = (editedTask) => {
   document.getElementById("task-category-container").innerHTML = "";
   categories.forEach((c) => {
     const categoryLabelDiv = document.createElement("div");
@@ -140,6 +140,8 @@ const generateCategoryLabels = () => {
     categoryLabelDiv.dataset.id = c.id;
     categoryLabelDiv.style.backgroundColor = c.color;
     categoryLabelDiv.textContent = c.name;
+    if (editedTask && c.id === editedTask)
+      categoryLabelDiv.classList.add("selected");
     categoryLabelDiv.addEventListener("click", (e) => {
       document
         .querySelectorAll(".task-type-label")
@@ -211,7 +213,9 @@ const showTasksList = () => {
   const taskListBox = document.getElementById("box--taskList");
   taskListBox.innerHTML = "";
   filteredTasks.forEach((t) => {
-    taskListBox.innerHTML += `<div class="taskList--item"><div>${
+    taskListBox.innerHTML += `<div class="taskList--item"><div><button class="btn btn--editTask" data-task-id="${
+      t.id
+    }"><i class="fa-solid fa-edit"></i></button>${
       t.title
     }</div><div style="display: flex"><div class="category-color-badge" style="background-color:${
       categories.find((c) => c.id === t.categoryId).color
@@ -219,6 +223,29 @@ const showTasksList = () => {
       t.id
     }"/></div</div>`;
   });
+
+  document.querySelectorAll(".btn--editTask").forEach((btnEdit) =>
+    btnEdit.addEventListener("click", () => {
+      const editedTask = tasks.find(
+        (task) => task.id === btnEdit.dataset.taskId
+      );
+      addModal.style.display = "block";
+      generateCategoryLabels(editedTask.categoryId);
+      const editForm = document.getElementById("add-form");
+      editForm["title"].value = editedTask.title;
+      editForm["date"].value = moment(editedTask.date).format("YYYY-MM-DD");
+      Array.from(editForm["start-time"].children).find(
+        (op) => op.innerText === moment(editedTask.startTime).format("HH:mm")
+      ).selected = true;
+      Array.from(editForm["end-time"].children).find(
+        (op) => op.innerHTML === moment(editedTask.endTime).format("HH:mm")
+      ).selected = true;
+      editForm["categoryId"].value = editedTask.categoryId;
+      editForm["description"].value = editedTask.description;
+      editForm.children[editForm.children.length - 2].classList.remove("hide");
+      editForm["done"].checked = editedTask.done;
+    })
+  );
 };
 
 const openSearchBox = () => {
