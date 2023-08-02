@@ -8,6 +8,8 @@ const viewModal = document.getElementById("view-task-modal");
 const addModal = document.getElementById("add-task-modal");
 const addForm = document.getElementById("add-form");
 
+let isSearchPanelOpen = false;
+
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
     filterTodaysTasks().length
@@ -199,6 +201,21 @@ const saveTask = (e) => {
 document.getElementById("btn--addTask").addEventListener("click", () => {
   addModal.style.display = "block";
   generateCategoryLabels();
+});
+
+document.getElementById("btn--searchTask").addEventListener("click", () => {
+  isSearchPanelOpen = !isSearchPanelOpen;
+  if (isSearchPanelOpen) {
+    Array.from(
+      document.getElementsByTagName("main")[0].children
+    )[0].style.display = "none";
+    document.getElementById("box--searchTask").style.display = "block";
+  } else {
+    Array.from(
+      document.getElementsByTagName("main")[0].children
+    )[0].style.display = "block";
+    document.getElementById("box--searchTask").style.display = "none";
+  }
 });
 
 addForm.addEventListener("submit", saveTask);

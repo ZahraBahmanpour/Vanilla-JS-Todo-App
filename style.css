@@ -196,3 +196,7 @@ input::placeholder {
   display: flex;
   justify-content: space-evenly;
 }
+
+#test {
+  display: none;
+}
