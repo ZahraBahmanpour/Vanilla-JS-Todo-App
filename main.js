@@ -9,6 +9,7 @@ const addModal = document.getElementById("add-task-modal");
 const addForm = document.getElementById("add-form");
 
 let isSearchPanelOpen = false;
+let filteredTasks = tasks;
 
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
@@ -204,10 +205,10 @@ document.getElementById("btn--addTask").addEventListener("click", () => {
 });
 
 const showTasksList = () => {
-  tasks.forEach((t) => {
-    document.getElementById(
-      "box--taskList"
-    ).innerHTML += `<div class="taskList--item"><div>${
+  const taskListBox = document.getElementById("box--taskList");
+  taskListBox.innerHTML = "";
+  filteredTasks.forEach((t) => {
+    taskListBox.innerHTML += `<div class="taskList--item"><div>${
       t.title
     }</div><div class="category-color-badge" style="background-color:${
       categories.find((c) => c.id === t.categoryId).color
@@ -237,3 +238,10 @@ document
   .addEventListener("click", openSearchBox);
 
 addForm.addEventListener("submit", saveTask);
+
+document.getElementById("input--searchTask").addEventListener("input", (e) => {
+  filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(e.target.value.toLowerCase())
+  );
+  showTasksList();
+});
