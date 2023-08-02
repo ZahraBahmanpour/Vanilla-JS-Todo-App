@@ -10,6 +10,7 @@ const addForm = document.getElementById("add-form");
 
 let isSearchPanelOpen = false;
 let showDeleteCheckboxes = false;
+let editTaskId = false;
 let filteredTasks = tasks;
 let deleteTaskList = [];
 
@@ -161,23 +162,23 @@ const updateUI = () => {
   showTasksList();
 };
 
-const saveTask = (e) => {
-  e.preventDefault();
-
-  const title = e.target["title"].value;
-  const date = new Date(e.target["date"].value);
+const gatherFormData = (e) => {
+  const title = addForm["title"].value;
+  const date = new Date(addForm["date"].value);
   const startTime = new Date(date);
   startTime.setHours(
-    e.target["start-time"].value.toString().split(":")[0],
-    e.target["start-time"].value.toString().split(":")[1]
+    addForm["start-time"].value.toString().split(":")[0],
+    addForm["start-time"].value.toString().split(":")[1]
   );
   const endTime = new Date(date);
   endTime.setHours(
-    e.target["end-time"].value.toString().split(":")[0],
-    e.target["end-time"].value.toString().split(":")[1]
+    addForm["end-time"].value.toString().split(":")[0],
+    addForm["end-time"].value.toString().split(":")[1]
   );
-  const categoryId = Number(e.target["categoryId"].value);
-  const description = e.target["description"].value;
+  const categoryId = Number(addForm["categoryId"].value);
+  const description = addForm["description"].value;
+  const done = addForm["done"].checked;
+
   if (!title || !date || !startTime || !endTime || !categoryId) {
     alert("All fields are required");
     return;
@@ -189,19 +190,15 @@ const saveTask = (e) => {
   }
 
   const newTask = {
-    id: Date.now().toString(),
     title,
     date,
     startTime,
     endTime,
     categoryId,
     description,
-    done: false,
+    done,
   };
-  console.log(newTask);
-  tasks.push(newTask);
-  addModal.style.display = "none";
-  updateUI();
+  return newTask;
 };
 
 document.getElementById("btn--addTask").addEventListener("click", () => {
@@ -229,6 +226,7 @@ const showTasksList = () => {
       const editedTask = tasks.find(
         (task) => task.id === btnEdit.dataset.taskId
       );
+      editTaskId = editedTask.id;
       addModal.style.display = "block";
       generateCategoryLabels(editedTask.categoryId);
       const editForm = document.getElementById("add-form");
@@ -269,7 +267,25 @@ document
   .getElementById("btn--searchTask")
   .addEventListener("click", openSearchBox);
 
-addForm.addEventListener("submit", saveTask);
+const submitForm = (e) => {
+  e.preventDefault();
+  const task = gatherFormData();
+  console.log(task);
+  if (task) {
+    if (editTaskId) {
+      tasks.splice(
+        tasks.findIndex((t) => t.id === editTaskId),
+        1,
+        { id: editTaskId, ...task }
+      );
+    } else {
+      tasks.push({ id: Date.now().toString(), ...task, done: false });
+    }
+    addModal.style.display = "none";
+    updateUI();
+  }
+};
+addForm.addEventListener("submit", submitForm);
 
 document.getElementById("input--searchTask").addEventListener("input", (e) => {
   filteredTasks = tasks.filter((task) =>
