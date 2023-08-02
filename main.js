@@ -203,28 +203,37 @@ document.getElementById("btn--addTask").addEventListener("click", () => {
   generateCategoryLabels();
 });
 
-document.getElementById("btn--searchTask").addEventListener("click", () => {
+const showTasksList = () => {
+  tasks.forEach((t) => {
+    document.getElementById(
+      "box--taskList"
+    ).innerHTML += `<div class="taskList--item"><div>${
+      t.title
+    }</div><div class="category-color-badge" style="background-color:${
+      categories.find((c) => c.id === t.categoryId).color
+    }"></div></div>`;
+  });
+};
+
+const openSearchBox = () => {
   isSearchPanelOpen = !isSearchPanelOpen;
   if (isSearchPanelOpen) {
     Array.from(
       document.getElementsByTagName("main")[0].children
     )[0].style.display = "none";
     document.getElementById("box--searchTask").style.display = "block";
-    tasks.forEach((t) => {
-      document.getElementById(
-        "box--taskList"
-      ).innerHTML += `<div class="taskList--item"><div>${
-        t.title
-      }</div><div class="category-color-badge" style="background-color:${
-        categories.find((c) => c.id === t.categoryId).color
-      }"></div></div>`;
-    });
+
+    showTasksList();
   } else {
     Array.from(
       document.getElementsByTagName("main")[0].children
     )[0].style.display = "block";
     document.getElementById("box--searchTask").style.display = "none";
   }
-});
+};
+
+document
+  .getElementById("btn--searchTask")
+  .addEventListener("click", openSearchBox);
 
 addForm.addEventListener("submit", saveTask);
