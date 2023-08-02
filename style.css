@@ -230,3 +230,14 @@ input::placeholder {
 .hide {
   display: none;
 }
+
+.btn--editTask {
+  color: var(--edit);
+  background-color: var(--white);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.btn--editTask:hover {
+  color: var(--info);
+}
