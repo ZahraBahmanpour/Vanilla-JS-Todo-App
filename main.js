@@ -210,9 +210,11 @@ const showTasksList = () => {
   filteredTasks.forEach((t) => {
     taskListBox.innerHTML += `<div class="taskList--item"><div>${
       t.title
-    }</div><div class="category-color-badge" style="background-color:${
+    }</div><div style="display: flex"><div class="category-color-badge" style="background-color:${
       categories.find((c) => c.id === t.categoryId).color
-    }"></div></div>`;
+    }"></div><input type="checkbox" class="delete--item--checkbox" value="${
+      t.id
+    }"/></div</div>`;
   });
 };
 
