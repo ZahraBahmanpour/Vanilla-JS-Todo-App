@@ -35,7 +35,8 @@ form .btn {
   padding: 0.5rem;
 }
 
-.heading--top .btn {
+.heading--top .btn,
+.box--searchTask--top .btn {
   width: 2rem;
   height: 2rem;
 }
@@ -197,6 +198,12 @@ input::placeholder {
   justify-content: space-evenly;
 }
 
-#box--searchTask {
+.box--searchTask {
   display: none;
+  margin-top: 2rem;
+}
+
+.box--searchTask--top {
+  display: flex;
+  justify-content: space-between;
 }
