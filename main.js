@@ -9,7 +9,9 @@ const addModal = document.getElementById("add-task-modal");
 const addForm = document.getElementById("add-form");
 
 let isSearchPanelOpen = false;
+let showDeleteCheckboxes = false;
 let filteredTasks = tasks;
+let deleteTaskList = [];
 
 const showTodaysTaskCount = () => {
   document.querySelector(".heading--bottom").textContent = `Today you have ${
@@ -154,6 +156,7 @@ const updateUI = () => {
   showTaksSummary();
   showTasksCategory();
   showTasksInTimeline();
+  showTasksList();
 };
 
 const saveTask = (e) => {
@@ -246,4 +249,36 @@ document.getElementById("input--searchTask").addEventListener("input", (e) => {
     task.title.toLowerCase().includes(e.target.value.toLowerCase())
   );
   showTasksList();
+});
+
+const deleteTasks = () => {
+  deleteTaskList.forEach((del) =>
+    tasks.splice(
+      tasks.findIndex((t) => t.id === del),
+      1
+    )
+  );
+  updateUI();
+};
+document.getElementById("btn--deleteTask").addEventListener("click", () => {
+  showDeleteCheckboxes = !showDeleteCheckboxes;
+  const checkboxes = document.querySelectorAll(".delete--item--checkbox");
+  if (showDeleteCheckboxes) {
+    deleteTaskList = [];
+    checkboxes.forEach((ch) => {
+      ch.classList.add("show");
+
+      ch.addEventListener("change", (e) => {
+        console.dir(ch);
+        if (ch.checked) {
+          deleteTaskList.push(ch.value);
+        } else {
+          deleteTaskList = deleteTaskList.filter((d) => d !== ch.value);
+        }
+      });
+    });
+  } else {
+    checkboxes.forEach((ch) => ch.classList.remove("show"));
+    deleteTasks();
+  }
 });
