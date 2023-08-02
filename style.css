@@ -197,6 +197,6 @@ input::placeholder {
   justify-content: space-evenly;
 }
 
-#test {
+#box--searchTask {
   display: none;
 }
