@@ -207,3 +207,13 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
 }
+
+/* search box */
+
+.taskList--item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
