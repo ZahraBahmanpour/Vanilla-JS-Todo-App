@@ -230,6 +230,14 @@ input::placeholder {
   border-bottom: 1px solid var(--line);
 }
 
+.taskList--item:hover {
+  background-color: var(--line);
+}
+
+.taskList--item--done {
+  background-color: var(--green);
+}
+
 .delete--item--checkbox {
   margin-left: 0.5rem;
   display: none;
