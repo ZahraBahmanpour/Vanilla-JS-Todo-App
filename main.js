@@ -1,7 +1,10 @@
 import { categories, tasks } from "./module.js";
 
 const filterTodaysTasks = () => {
-  return tasks.filter((task) => task.date.getDate() === new Date().getDate());
+  console.log(tasks);
+  return tasks.filter(
+    (task) => task.date.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)
+  );
 };
 
 const viewModal = document.getElementById("view-task-modal");
@@ -290,6 +293,7 @@ const submitForm = (e) => {
       );
     } else {
       tasks.push({ id: Date.now().toString(), ...task, done: false });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
     }
     addModal.style.display = "none";
     updateUI();
