@@ -45,7 +45,7 @@ form .btn {
 
 .box--summary {
   margin-top: 1.5rem;
-  animation: fadeIn 500ms;
+  animation: fadeIn var(--animation-duration);
 }
 
 .box--summary .badge,
@@ -103,7 +103,7 @@ form .btn {
 /* timeline */
 .box--timeline {
   margin-top: 2em;
-  animation: fadeIn 500ms;
+  animation: fadeIn var(--animation-duration);
 }
 
 .box--timeline .timeline--row {
@@ -214,7 +214,7 @@ input::placeholder {
 .box--searchTask {
   display: none;
   margin-top: 2rem;
-  animation: fadeIn 500ms;
+  animation: fadeIn var(--animation-duration);
 }
 
 .box--searchTask--top {
