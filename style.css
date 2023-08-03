@@ -45,6 +45,7 @@ form .btn {
 
 .box--summary {
   margin-top: 1.5rem;
+  animation: fadeIn 500ms;
 }
 
 .box--summary .badge,
@@ -102,6 +103,7 @@ form .btn {
 /* timeline */
 .box--timeline {
   margin-top: 2em;
+  animation: fadeIn 500ms;
 }
 
 .box--timeline .timeline--row {
@@ -198,17 +200,27 @@ input::placeholder {
   justify-content: space-evenly;
 }
 
+/* search box */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .box--searchTask {
   display: none;
   margin-top: 2rem;
+  animation: fadeIn 500ms;
 }
 
 .box--searchTask--top {
   display: flex;
   justify-content: space-between;
 }
-
-/* search box */
 
 .taskList--item {
   display: flex;
