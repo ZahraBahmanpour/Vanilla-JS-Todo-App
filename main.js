@@ -293,7 +293,6 @@ const submitForm = (e) => {
       );
     } else {
       tasks.push({ id: Date.now().toString(), ...task, done: false });
-      localStorage.setItem("tasks", JSON.stringify(tasks));
     }
     addModal.style.display = "none";
     updateUI();
