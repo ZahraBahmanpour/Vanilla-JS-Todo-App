@@ -1,7 +1,6 @@
 import { categories, tasks } from "./module.js";
 
 const filterTodaysTasks = () => {
-  console.log(tasks);
   return tasks.filter(
     (task) => task.date.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)
   );
@@ -295,6 +294,7 @@ const submitForm = (e) => {
       tasks.push({ id: Date.now().toString(), ...task, done: false });
     }
     addModal.style.display = "none";
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     updateUI();
   }
 };
@@ -314,6 +314,7 @@ const deleteTasks = () => {
       1
     )
   );
+  localStorage.setItem("tasks", JSON.stringify(tasks));
   updateUI();
 };
 document.getElementById("btn--deleteTask").addEventListener("click", () => {
