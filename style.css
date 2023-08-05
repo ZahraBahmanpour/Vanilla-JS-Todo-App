@@ -261,3 +261,9 @@ input::placeholder {
 .btn--editTask:hover {
   color: var(--info);
 }
+
+.check--all-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}

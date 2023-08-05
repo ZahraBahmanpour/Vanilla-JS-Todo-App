@@ -157,6 +157,29 @@ const generateCategoryLabels = (editedTask) => {
   });
 };
 
+const createDeleteAllCheckbox = () => {
+  const container = document.createElement("div");
+  container.classList.add("check--all-container");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = "delete--check--all";
+  checkbox.addEventListener("change", (e) => {
+    deleteTaskList = [];
+    if (checkbox.checked) {
+      document.querySelectorAll(".delete--item--checkbox").forEach((ch) => {
+        ch.checked = true;
+        deleteTaskList.push(ch.value);
+      });
+    } else {
+      document.querySelectorAll(".delete--item--checkbox").forEach((ch) => {
+        ch.checked = false;
+      });
+    }
+  });
+  container.append(checkbox);
+  document.getElementById("box--taskList").append(container);
+};
+
 const updateUI = () => {
   showTodaysTaskCount();
   showTaksSummary();
@@ -321,6 +344,7 @@ document.getElementById("btn--deleteTask").addEventListener("click", () => {
   showDeleteCheckboxes = !showDeleteCheckboxes;
   const checkboxes = document.querySelectorAll(".delete--item--checkbox");
   if (showDeleteCheckboxes) {
+    createDeleteAllCheckbox();
     deleteTaskList = [];
     checkboxes.forEach((ch) => {
       ch.classList.add("show");
@@ -329,6 +353,7 @@ document.getElementById("btn--deleteTask").addEventListener("click", () => {
         if (ch.checked) {
           deleteTaskList.push(ch.value);
         } else {
+          document.getElementById("delete--check--all").checked = false;
           deleteTaskList = deleteTaskList.filter((d) => d !== ch.value);
         }
       });
