@@ -138,7 +138,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
-const generateCategoryLabels = (editedTask) => {
+const createCategoryLabels = (editedTask) => {
   const categoryContainerDiv = document.getElementById(
     "task-category-container"
   );
@@ -234,7 +234,7 @@ const gatherFormData = (e) => {
 
 document.getElementById("btn--addTask").addEventListener("click", () => {
   addModal.style.display = "block";
-  generateCategoryLabels();
+  createCategoryLabels();
 });
 
 const showTasksList = () => {
@@ -260,7 +260,7 @@ const showTasksList = () => {
       );
       editTaskId = editedTask.id;
       addModal.style.display = "block";
-      generateCategoryLabels(editedTask.categoryId);
+      createCategoryLabels(editedTask.categoryId);
       const editForm = document.getElementById("add-form");
       editForm["title"].value = editedTask.title;
       editForm["date"].value = moment(editedTask.date).format("YYYY-MM-DD");
