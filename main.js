@@ -294,7 +294,7 @@ const submitForm = (e) => {
       tasks.push({ id: Date.now().toString(), ...task, done: false });
     }
     addModal.style.display = "none";
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    // localStorage.setItem("tasks", JSON.stringify(tasks));
     updateUI();
   }
 };
@@ -314,7 +314,7 @@ const deleteTasks = () => {
       1
     )
   );
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  //localStorage.setItem("tasks", JSON.stringify(tasks));
   updateUI();
 };
 document.getElementById("btn--deleteTask").addEventListener("click", () => {
