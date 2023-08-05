@@ -32,7 +32,7 @@ export const tasks = [
     title: "Meeting",
     date: new Date(),
     startTime: new Date().setHours(12, 30),
-    endTime: new Date().setHours(13, 30),
+    endTime: new Date().setHours(14, 30),
     categoryId: 1,
     description: "Skype meeting with John",
     done: false,
