@@ -9,6 +9,7 @@ const filterTodaysTasks = () => {
 const viewModal = document.getElementById("view-task-modal");
 const addModal = document.getElementById("add-task-modal");
 const addForm = document.getElementById("add-form");
+const taskListBox = document.getElementById("box--taskList");
 
 let isSearchPanelOpen = false;
 let showDeleteCheckboxes = false;
@@ -37,7 +38,8 @@ const showTaksSummary = () => {
 };
 
 const showTasksCategory = () => {
-  document.getElementById("box--categories").innerHTML = "";
+  const categoriesDiv = document.getElementById("box--categories");
+  categoriesDiv.innerHTML = "";
   categories.forEach((c) => {
     const taskCount = filterTodaysTasks().filter(
       (t) => t.categoryId === c.id
@@ -50,7 +52,7 @@ const showTasksCategory = () => {
             <div class="badge">${c.name}</div>
             <span>${taskCount} ${taskCount > 1 ? `tasks` : `task`}</span>
             </div>`;
-      document.getElementById("box--categories").innerHTML += card;
+      categoriesDiv.innerHTML += card;
     }
   });
 };
@@ -137,7 +139,10 @@ window.addEventListener("click", (e) => {
 });
 
 const generateCategoryLabels = (editedTask) => {
-  document.getElementById("task-category-container").innerHTML = "";
+  const categoryContainerDiv = document.getElementById(
+    "task-category-container"
+  );
+  categoryContainerDiv.innerHTML = "";
   categories.forEach((c) => {
     const categoryLabelDiv = document.createElement("div");
     categoryLabelDiv.classList.add("task-type-label");
@@ -153,7 +158,7 @@ const generateCategoryLabels = (editedTask) => {
       e.target.classList.add("selected");
       addForm["categoryId"].value = e.target.dataset.id;
     });
-    document.getElementById("task-category-container").append(categoryLabelDiv);
+    categoryContainerDiv.append(categoryLabelDiv);
   });
 };
 
@@ -177,7 +182,7 @@ const createDeleteAllCheckbox = () => {
     }
   });
   container.append(checkbox);
-  document.getElementById("box--taskList").append(container);
+  taskListBox.append(container);
 };
 
 const updateUI = () => {
@@ -233,7 +238,6 @@ document.getElementById("btn--addTask").addEventListener("click", () => {
 });
 
 const showTasksList = () => {
-  const taskListBox = document.getElementById("box--taskList");
   taskListBox.innerHTML = "";
   filteredTasks.forEach((t) => {
     taskListBox.innerHTML += `<div class="taskList--item ${
