@@ -134,7 +134,7 @@ window.addEventListener("click", (e) => {
   if (e.target == viewModal || e.target == addModal) {
     viewModal.style.display = "none";
     addModal.style.display = "none";
-    resetFormFields();
+    addForm.reset();
   }
 });
 
@@ -295,14 +295,6 @@ const openSearchBox = () => {
   }
 };
 
-const resetFormFields = () => {
-  addForm["title"].value = "";
-  addForm["date"].value = "";
-  addForm["start-time"].selectedIndex = 0;
-  addForm["end-time"].selectedIndex = 0;
-  addForm["description"].value = "";
-  addForm.children[addForm.children.length - 2].classList.add("hide");
-};
 document
   .getElementById("btn--searchTask")
   .addEventListener("click", openSearchBox);
