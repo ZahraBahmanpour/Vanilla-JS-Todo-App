@@ -61,7 +61,7 @@ const createTimeLineCardEventListeners = () => {
   const todoCards = document.querySelectorAll(".box--timeline .todo-card");
   todoCards.forEach((todoCard) => {
     todoCard.addEventListener("click", (e) => {
-      viewModal.style.display = "block";
+      viewModal.showModal();
 
       const currentCardId = e.currentTarget.id.split("-")[2];
       const currentTask = filterTodaysTasks().find(
@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", documentReady);
 
 window.addEventListener("click", (e) => {
   if (e.target == viewModal || e.target == addModal) {
-    viewModal.style.display = "none";
-    addModal.style.display = "none";
+    viewModal.close();
+    addModal.close();
     addForm.reset();
   }
 });
@@ -232,7 +232,7 @@ const gatherFormData = (e) => {
 };
 
 document.getElementById("btn--addTask").addEventListener("click", () => {
-  addModal.style.display = "block";
+  addModal.showModal();
   createCategoryLabels();
 });
 
@@ -258,7 +258,7 @@ const showTasksList = () => {
         (task) => task.id === btnEdit.dataset.taskId
       );
       editTaskId = editedTask.id;
-      addModal.style.display = "block";
+      addModal.showModal();
       createCategoryLabels(editedTask.categoryId);
       const editForm = document.getElementById("add-form");
       editForm["title"].value = editedTask.title;
@@ -311,7 +311,7 @@ const submitForm = (e) => {
     } else {
       tasks.push({ id: Date.now().toString(), ...task, done: false });
     }
-    addModal.style.display = "none";
+    addModal.close();
     // localStorage.setItem("tasks", JSON.stringify(tasks));
     updateUI();
   }
