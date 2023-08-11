@@ -240,7 +240,7 @@ const showTasksList = () => {
   taskListBox.innerHTML = "";
   filteredTasks.forEach((t) => {
     taskListBox.innerHTML += `<div class="taskList--item ${
-      t.done ? "taskList--item--done" : ""
+      t.done ? "done" : ""
     }"><div><button class="btn--editTask" data-task-id="${
       t.id
     }"><i class="fa-solid fa-edit"></i></button>${
