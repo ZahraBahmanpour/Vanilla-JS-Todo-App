@@ -134,6 +134,8 @@ window.addEventListener("click", (e) => {
     viewModal.close();
     addModal.close();
     addForm.reset();
+    addForm["btn-submit"].innerHTML = "Add Task";
+    addForm["done"].parentElement.classList.add("hide");
   }
 });
 
@@ -261,6 +263,7 @@ const showTasksList = () => {
       addModal.showModal();
       createCategoryLabels(editedTask.categoryId);
       const editForm = document.getElementById("add-form");
+      editForm["btn-submit"].innerHTML = "Edit Task";
       editForm["title"].value = editedTask.title;
       editForm["date"].value = moment(editedTask.date).format("YYYY-MM-DD");
       Array.from(editForm["start-time"].children).find(
@@ -271,6 +274,7 @@ const showTasksList = () => {
       ).selected = true;
       editForm["categoryId"].value = editedTask.categoryId;
       editForm["description"].value = editedTask.description;
+      editForm["done"].parentElement.classList.remove("hide");
       editForm.children[editForm.children.length - 2].classList.remove("hide");
       editForm["done"].checked = editedTask.done;
     })
