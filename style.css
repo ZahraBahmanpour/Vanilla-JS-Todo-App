@@ -242,3 +242,32 @@ input::placeholder {
   justify-content: flex-end;
   padding: 1.5rem;
 }
+
+/* media queries */
+@media (max-width: 567px) {
+  .box--categories {
+    grid-template-columns: 1fr;
+  }
+  .task-category-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 80%;
+  }
+  dialog {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .container {
+    width: 60%;
+  }
+  dialog {
+    width: 60%;
+  }
+}
