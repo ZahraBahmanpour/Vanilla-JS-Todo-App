@@ -173,9 +173,15 @@ input::placeholder {
   margin-right: 0.5rem;
 }
 
+.form--rowContainer.form--btn--container {
+  display: flex;
+  justify-content: center;
+}
+
 .task-category-container {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 0.5rem;
 }
 
 /* search box */
